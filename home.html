@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fórmulas Avançadas em LibreOffice Calc — O Guia Completo</title>
+<meta name="description" content="Domine matrizes, banco de dados, REGEX, funções financeiras, auditoria e automação no LibreOffice Calc. Guia prático com mais de 200 fórmulas e exemplos prontos.">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    color: #1a1a1a;
+    background: #f7f9fc;
+  }
+  .container { max-width: 780px; margin: 0 auto; padding: 0 20px; }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+    color: #fff;
+    padding: 70px 20px 60px;
+    text-align: center;
+  }
+  .hero .badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    margin-bottom: 22px;
+    text-transform: uppercase;
+  }
+  .hero h1 {
+    font-size: 38px;
+    line-height: 1.2;
+    font-weight: 800;
+    margin-bottom: 18px;
+    letter-spacing: -0.5px;
+  }
+  .hero h1 span { color: #ffd166; }
+  .hero p.sub {
+    font-size: 19px;
+    color: #d6e4f0;
+    max-width: 620px;
+    margin: 0 auto 32px;
+  }
+  .hero .cta-btn {
+    display: inline-block;
+    background: #ffd166;
+    color: #1e3a5f;
+    padding: 16px 42px;
+    border-radius: 8px;
+    font-size: 17px;
+    font-weight: 700;
+    text-decoration: none;
+    transition: transform 0.15s, box-shadow 0.15s;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.2);
+  }
+  .hero .cta-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  }
+  .hero .price-note {
+    margin-top: 14px;
+    font-size: 14px;
+    color: #a8c4e0;
+  }
+
+  /* SEÇÕES */
+  section { padding: 55px 20px; }
+  section h2 {
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 24px;
+    color: #1e3a5f;
+    letter-spacing: -0.3px;
+  }
+  section h2.center { text-align: center; }
+
+  .problem {
+    background: #fff;
+    border-left: 4px solid #e53e3e;
+  }
+  .problem p { margin-bottom: 14px; font-size: 17px; }
+  .problem strong { color: #c53030; }
+
+  /* BULLETS */
+  .benefits { background: #fff; }
+  .benefits ul { list-style: none; }
+  .benefits li {
+    padding: 16px 0 16px 44px;
+    position: relative;
+    border-bottom: 1px solid #edf2f7;
+    font-size: 16.5px;
+  }
+  .benefits li:last-child { border-bottom: none; }
+  .benefits li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    top: 16px;
+    width: 28px;
+    height: 28px;
+    background: #38a169;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    font-weight: 700;
+  }
+  .benefits li strong { color: #1e3a5f; }
+
+  /* CONTEÚDO */
+  .content { background: #f7f9fc; }
+  .content .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-top: 8px;
+  }
+  .content .card {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e2e8f0;
+  }
+  .content .card h3 {
+    font-size: 15px;
+    color: #2c5282;
+    margin-bottom: 6px;
+    font-weight: 700;
+  }
+  .content .card p { font-size: 14px; color: #4a5568; }
+
+  /* PARA QUEM */
+  .audience { background: #fff; }
+  .audience p { font-size: 16.5px; margin-bottom: 12px; }
+  .audience .not-for {
+    background: #fff5f5;
+    border-left: 4px solid #e53e3e;
+    padding: 16px 20px;
+    border-radius: 4px;
+    margin-top: 20px;
+    font-size: 15.5px;
+    color: #742a2a;
+  }
+
+  /* AUTOR */
+  .author { background: #f7f9fc; }
+  .author p { font-size: 16.5px; margin-bottom: 12px; }
+
+  /* GARANTIA */
+  .guarantee {
+    background: #f0fff4;
+    border: 1px solid #9ae6b4;
+    border-radius: 10px;
+    padding: 28px;
+    text-align: center;
+    margin: 0 auto;
+    max-width: 640px;
+  }
+  .guarantee h3 { color: #276749; font-size: 20px; margin-bottom: 10px; }
+  .guarantee p { color: #2f855a; font-size: 15.5px; }
+
+  /* CTA FINAL */
+  .final-cta {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+    color: #fff;
+    text-align: center;
+    padding: 65px 20px;
+  }
+  .final-cta h2 {
+    color: #fff;
+    font-size: 30px;
+    margin-bottom: 16px;
+  }
+  .final-cta p {
+    color: #d6e4f0;
+    font-size: 17px;
+    max-width: 560px;
+    margin: 0 auto 30px;
+  }
+  .final-cta .cta-btn {
+    display: inline-block;
+    background: #ffd166;
+    color: #1e3a5f;
+    padding: 18px 48px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 700;
+    text-decoration: none;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.25);
+    transition: transform 0.15s;
+  }
+  .final-cta .cta-btn:hover { transform: translateY(-2px); }
+  .final-cta .sub-note {
+    margin-top: 16px;
+    font-size: 14px;
+    color: #a8c4e0;
+  }
+
+  /* FAQ */
+  .faq { background: #fff; }
+  .faq details {
+    border-bottom: 1px solid #edf2f7;
+    padding: 14px 0;
+  }
+  .faq summary {
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    color: #1e3a5f;
+    list-style: none;
+  }
+  .faq summary::marker { display: none; }
+  .faq summary::after {
+    content: "+";
+    float: right;
+    font-size: 20px;
+    color: #2c5282;
+  }
+  .faq details[open] summary::after { content: "−"; }
+  .faq details p {
+    margin-top: 10px;
+    font-size: 15.5px;
+    color: #4a5568;
+  }
+
+  /* FOOTER */
+  footer {
+    background: #1a202c;
+    color: #a0aec0;
+    padding: 30px 20px;
+    text-align: center;
+    font-size: 13.5px;
+  }
+  footer a { color: #90cdf4; text-decoration: none; }
+
+  @media (max-width: 600px) {
+    .hero h1 { font-size: 28px; }
+    .hero p.sub { font-size: 16px; }
+    .content .grid { grid-template-columns: 1fr; }
+    section h2 { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="container">
+    <div class="badge">Guia Completo · 28 Capítulos · +200 Fórmulas</div>
+    <h1>Pare de usar o LibreOffice Calc como uma <span>calculadora gigante</span>.</h1>
+    <p class="sub">Domine fórmulas matriciais, banco de dados, REGEX, funções financeiras, auditoria e automação — e transforme planilhas comuns em sistemas profissionais.</p>
+    <a href="#comprar" class="cta-btn">Quero o ebook agora →</a>
+    <p class="price-note">Acesso imediato · Garantia de 7 dias · Pagamento único</p>
+  </div>
+</header>
+
+<!-- PROBLEMA -->
+<section class="problem">
+  <div class="container">
+    <h2>Você reconhece isso?</h2>
+    <p>Você usa <strong>PROCV</strong> para tudo, mesmo quando ele não resolve.</p>
+    <p>Você já precisou somar valores com <strong>múltiplos critérios</strong> e acabou criando colunas auxiliares que ninguém entende.</p>
+    <p>Você já herdou uma planilha com <strong>fórmulas quebradas</strong> e passou horas tentando descobrir o que estava errado.</p>
+    <p>Você sabe que o Calc pode fazer <strong>muito mais</strong> — mas nunca teve um guia que fosse direto ao ponto.</p>
+  </div>
+</section>
+
+<!-- BENEFÍCIOS -->
+<section class="benefits">
+  <div class="container">
+    <h2>O que você vai dominar</h2>
+    <ul>
+      <li><strong>Fórmulas matriciais</strong> — processe intervalos inteiros com uma única fórmula e elimine colunas auxiliares.</li>
+      <li><strong>Funções de banco de dados (D-Funções)</strong> — faça consultas poderosas direto na planilha, sem depender de PROCV.</li>
+      <li><strong>ÍNDICE + CORRESP</strong> — a dupla que substitui PROCV em qualquer cenário, inclusive buscas à esquerda e bidimensionais.</li>
+      <li><strong>Expressões regulares (REGEX)</strong> — limpe, extraia e transforme textos com precisão cirúrgica.</li>
+      <li><strong>Funções financeiras</strong> — VPL, TIR, PGTO, NPER e muito mais para análise de investimentos real.</li>
+      <li><strong>Referências absolutas, relativas e mistas</strong> — entenda de uma vez por todas por que suas fórmulas quebram ao copiar.</li>
+      <li><strong>Auditoria com o Detetive</strong> — rastreie precedentes e dependentes, encontre erros em segundos.</li>
+      <li><strong>Otimização de desempenho</strong> — saiba quais fórmulas são voláteis, o que trava a planilha e como corrigir.</li>
+      <li><strong>Macros e funções personalizadas</strong> — crie suas próprias funções em Basic e use como se fossem nativas.</li>
+      <li><strong>Estudos de caso reais</strong> — controle financeiro, análise de vendas, gestão de estoque, avaliação de investimentos e dashboard executivo.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- CONTEÚDO -->
+<section class="content">
+  <div class="container">
+    <h2>O que tem dentro</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>Parte I — Fundamentos Avançados</h3>
+        <p>Anatomia de fórmulas, referências em profundidade, operadores e tratamento de erros.</p>
+      </div>
+      <div class="card">
+        <h3>Parte II — Fórmulas Matriciais</h3>
+        <p>Matrizes, operadores, MATRIZ.MULT, SOMARPRODUTO e técnicas avançadas.</p>
+      </div>
+      <div class="card">
+        <h3>Parte III — Consultas e Referências</h3>
+        <p>PROCV, ÍNDICE+CORRESP, D-Funções, DESLOC e INDIRETO.</p>
+      </div>
+      <div class="card">
+        <h3>Parte IV — Texto e REGEX</h3>
+        <p>Manipulação de texto, expressões regulares e limpeza de dados.</p>
+      </div>
+      <div class="card">
+        <h3>Parte V — Data, Hora e Lógica</h3>
+        <p>DATADIF, DIATRABALHOTOTAL, SES, E/OU e funções de informação.</p>
+      </div>
+      <div class="card">
+        <h3>Parte VI — Matemática e Finanças</h3>
+        <p>Arredondamento, estatística avançada, VPL, TIR, PGTO e depreciação.</p>
+      </div>
+      <div class="card">
+        <h3>Parte VII — Produtividade e Auditoria</h3>
+        <p>Intervalos nomeados, validação, formatação condicional e otimização.</p>
+      </div>
+      <div class="card">
+        <h3>Parte VIII — Integração e Automação</h3>
+        <p>Macros, funções personalizadas, tabelas dinâmicas e estudos de caso.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PARA QUEM -->
+<section class="audience">
+  <div class="container">
+    <h2>Para quem é este ebook</h2>
+    <p>Para <strong>analistas, contadores, administradores e profissionais de dados</strong> que já usam o Calc no dia a dia e querem parar de improvisar.</p>
+    <p>Para <strong>programadores e pessoas técnicas</strong> que querem extrair o máximo do Calc sem precisar migrar para Excel ou Python.</p>
+    <p>Para quem está <strong>migrando do Excel para o LibreOffice</strong> e quer manter (ou superar) o nível de produtividade.</p>
+    <div class="not-for">
+      <strong>Não é para quem</strong> nunca abriu uma planilha na vida. Se você não sabe o que é uma referência de célula ou uma função SE, este material vai ser pesado demais.
+    </div>
+  </div>
+</section>
+
+<!-- AUTOR -->
+<section class="author">
+  <div class="container">
+    <h2>Sobre o material</h2>
+    <p>Este guia foi construído a partir da <strong>documentação oficial do LibreOffice</strong>, de fóruns da comunidade e da experiência prática de quem usa o Calc como ferramenta de trabalho — não como hobby.</p>
+    <p>Cada capítulo traz <strong>sintaxe detalhada, exemplos prontos para copiar, armadilhas comuns e exercícios de fixação</strong>. Você não vai apenas ler: vai aplicar.</p>
+    <p>O material cobre da versão 7.x até a 26.x, e os conceitos são compatíveis entre versões, salvo indicação em contrário.</p>
+  </div>
+</section>
+
+<!-- GARANTIA -->
+<section>
+  <div class="container">
+    <div class="guarantee">
+      <h3>Garantia de 7 dias</h3>
+      <p>Se em 7 dias você achar que o conteúdo não vale o investimento, peça o reembolso pela Hotmart. Sem perguntas, sem burocracia. O risco é todo meu.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="container">
+    <h2>Perguntas frequentes</h2>
+
+    <details>
+      <summary>Em que formato recebo o ebook?</summary>
+      <p>PDF, com acesso imediato após a confirmação do pagamento. Você pode ler no computador, tablet ou celular.</p>
+    </details>
+
+    <details>
+      <summary>Serve para qual versão do LibreOffice?</summary>
+      <p>O conteúdo é compatível com as versões 7.x, 24.x, 25.x e 26.x. Conceitos e fórmulas funcionam em todas elas, salvo indicação em contrário.</p>
+    </details>
+
+    <details>
+      <summary>Preciso saber programar?</summary>
+      <p>Não. Todo o conteúdo é focado em fórmulas nativas do Calc. A parte de macros (Capítulo 26) é um bônus para quem quiser ir além, mas não é pré-requisito.</p>
+    </details>
+
+    <details>
+      <summary>É diferente de um curso em vídeo?</summary>
+      <p>Sim. O formato ebook é feito para consulta rápida e referência. Você abre no capítulo que precisa, copia a fórmula e aplica. Sem enrolação, sem vídeo de 40 minutos para explicar uma linha.</p>
+    </details>
+
+    <details>
+      <summary>Posso pedir reembolso?</summary>
+      <p>Sim, dentro de 7 dias após a compra, diretamente pela Hotmart. O reembolso é integral.</p>
+    </details>
+
+    <details>
+      <summary>Como recebo o acesso?</summary>
+      <p>Após a confirmação do pagamento, a Hotmart envia o link de download para o seu e-mail. Pagamentos via PIX ou cartão liberam o acesso em minutos.</p>
+    </details>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="final-cta" id="comprar">
+  <div class="container">
+    <h2>Comece hoje a usar o Calc como um profissional</h2>
+    <p>Você já perdeu tempo suficiente criando colunas auxiliares e caçando erros em fórmulas quebradas. Dê o próximo passo.</p>
+    <a href="COLE_AQUI_O_LINK_DA_HOTMART" class="cta-btn">Quero o ebook agora →</a>
+    <p class="sub-note">Acesso imediato · Garantia de 7 dias · Pagamento único</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <p>© 2026 · Fórmulas Avançadas em LibreOffice Calc</p>
+    <p style="margin-top:8px;">Dúvidas? <a href="mailto:seuemail@exemplo.com">seuemail@exemplo.com</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
